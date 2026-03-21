@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -9,48 +10,39 @@ import RegisterForm from "./components/RegisterForm";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 
-function getPreferredTheme() {
-  if (typeof window === "undefined") {
-    return "dark";
-  }
-
-  const savedTheme = window.localStorage.getItem("chesscamp-theme");
-  if (savedTheme === "light" || savedTheme === "dark") {
-    return savedTheme;
-  }
-
-  return window.matchMedia("(prefers-color-scheme: light)").matches
-    ? "light"
-    : "dark";
-}
+const campHighlights = [
+{ label: "Program", value: "Summer Chess Camp 2026" },
+{ label: "Start Date", value: "April 06, 2026" },
+{ label: "Duration", value: "4 Weeks" },
+{ label: "Age Group", value: "6-16 Years" },
+{ label: "Daily Time", value: "2 Hours" },
+{ label: "Mode", value: "Online + Offline" },
+];
 
 function App() {
-  const [theme, setTheme] = useState(getPreferredTheme);
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    window.localStorage.setItem("chesscamp-theme", theme);
-  }, [theme]);
+// 🔥 Backend connection test
+useEffect(() => {
+const API = import.meta.env.VITE_API_URL;
 
-  function toggleTheme() {
-    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
-  }
 
-  return (
-    <div className="app-shell">
-      <Navbar theme={theme} onToggleTheme={toggleTheme} />
-      <main>
-        <Hero theme={theme} />
-        <About />
-        <Details />
-        <Features />
-        <Pricing />
-        <RegisterForm />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
-  );
+console.log("API URL:", API);
+
+if (!API) {
+  console.error("❌ API URL is undefined");
+  return;
+}
+
+fetch(`${API}/api/test`)
+  .then((res) => res.text())
+  .then((data) => console.log("✅ API RESPONSE:", data))
+  .catch((err) => console.error("❌ API ERROR:", err));
+
+
+}, []);
+
+return ( <div className="app-shell"> <Navbar /> <main> <Hero highlights={campHighlights} /> <About /> <Details details={campHighlights} /> <Features /> <Pricing /> <RegisterForm /> <Contact /> </main> <Footer /> </div>
+);
 }
 
 export default App;
