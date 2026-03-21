@@ -33,7 +33,7 @@ function About() {
         {benefits.map((benefit) => (
           <article key={benefit.title} className="info-card hover-lift">
             <div className="info-card__icon" aria-hidden="true">
-              ♞
+              {"\u265E"}
             </div>
             <h3>{benefit.title}</h3>
             <p>{benefit.description}</p>

@@ -1,5 +1,5 @@
-import logoDark from "../assets/logo-dark.png";
-import logoLight from "../assets/logo-light.png";
+import logoDark from "../assets/logo-dark-256.png";
+import logoLight from "../assets/logo-light-256.png";
 
 const navItems = [
   { label: "Home", href: "#home" },
@@ -14,7 +14,14 @@ function Navbar({ theme, onToggleTheme }) {
   return (
     <header className="navbar">
       <a className="brand" href="#home" aria-label="ChessIQ home">
-        <img className="brand__logo" src={logoSrc} alt="ChessIQ logo" />
+        <img
+          className="brand__logo"
+          src={logoSrc}
+          alt="ChessIQ logo"
+          width="58"
+          height="58"
+          decoding="async"
+        />
         <div>
           <span className="brand__title">
             <span>Chess</span>

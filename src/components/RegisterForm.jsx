@@ -150,6 +150,9 @@ function RegisterForm() {
                   value={formValues.studentName}
                   onChange={handleChange}
                   placeholder="Enter student name"
+                  autoComplete="name"
+                  required
+                  aria-invalid={Boolean(errors.studentName)}
                 />
                 {errors.studentName ? <small>{errors.studentName}</small> : null}
               </label>
@@ -164,6 +167,9 @@ function RegisterForm() {
                   value={formValues.age}
                   onChange={handleChange}
                   placeholder="6 - 20"
+                  inputMode="numeric"
+                  required
+                  aria-invalid={Boolean(errors.age)}
                 />
                 {errors.age ? <small>{errors.age}</small> : null}
               </label>
@@ -175,6 +181,9 @@ function RegisterForm() {
                   value={formValues.parentName}
                   onChange={handleChange}
                   placeholder="Enter parent name"
+                  autoComplete="name"
+                  required
+                  aria-invalid={Boolean(errors.parentName)}
                 />
                 {errors.parentName ? <small>{errors.parentName}</small> : null}
               </label>
@@ -186,6 +195,11 @@ function RegisterForm() {
                   value={formValues.phoneNumber}
                   onChange={handleChange}
                   placeholder="10-digit phone number"
+                  autoComplete="tel"
+                  inputMode="numeric"
+                  pattern="[0-9]{10}"
+                  required
+                  aria-invalid={Boolean(errors.phoneNumber)}
                 />
                 {errors.phoneNumber ? <small>{errors.phoneNumber}</small> : null}
               </label>
@@ -198,6 +212,9 @@ function RegisterForm() {
                   value={formValues.email}
                   onChange={handleChange}
                   placeholder="Enter email address"
+                  autoComplete="email"
+                  required
+                  aria-invalid={Boolean(errors.email)}
                 />
                 {errors.email ? <small>{errors.email}</small> : null}
               </label>
@@ -208,6 +225,8 @@ function RegisterForm() {
                   name="experienceLevel"
                   value={formValues.experienceLevel}
                   onChange={handleChange}
+                  required
+                  aria-invalid={Boolean(errors.experienceLevel)}
                 >
                   <option value="">Select experience level</option>
                   <option value="Beginner">Beginner</option>
@@ -220,7 +239,13 @@ function RegisterForm() {
 
               <label className="form-field">
                 <span>Batch</span>
-                <select name="batch" value={formValues.batch} onChange={handleChange}>
+                <select
+                  name="batch"
+                  value={formValues.batch}
+                  onChange={handleChange}
+                  required
+                  aria-invalid={Boolean(errors.batch)}
+                >
                   <option value="">Select batch</option>
                   <option value="Morning">Morning</option>
                   <option value="Evening">Evening</option>
@@ -234,6 +259,8 @@ function RegisterForm() {
                   name="hasChessSet"
                   value={formValues.hasChessSet}
                   onChange={handleChange}
+                  required
+                  aria-invalid={Boolean(errors.hasChessSet)}
                 >
                   <option value="">Select an option</option>
                   <option value="Yes">Yes</option>
@@ -249,6 +276,8 @@ function RegisterForm() {
                     name="needsPremiumChessSet"
                     value={formValues.needsPremiumChessSet}
                     onChange={handleChange}
+                    required
+                    aria-invalid={Boolean(errors.needsPremiumChessSet)}
                   >
                     <option value="">Select an option</option>
                     <option value="Yes">Yes</option>
@@ -261,7 +290,11 @@ function RegisterForm() {
               ) : null}
             </div>
 
-            {submitError ? <p className="form-error">{submitError}</p> : null}
+            {submitError ? (
+              <p className="form-error" role="alert">
+                {submitError}
+              </p>
+            ) : null}
 
             <button
               type="submit"
@@ -286,7 +319,7 @@ function RegisterForm() {
           <div className="popup-card" onClick={(event) => event.stopPropagation()}>
             <span className="section-kicker">Success</span>
             <h3>Registration submitted successfully.</h3>
-            <p>
+            <p role="status" aria-live="polite">
               Thank you for registering with ChessIQ. We&apos;ll contact you
               shortly with the next steps.
             </p>

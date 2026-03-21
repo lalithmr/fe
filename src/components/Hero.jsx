@@ -1,5 +1,5 @@
-import logoDark from "../assets/logo-dark.png";
-import logoLight from "../assets/logo-light.png";
+import logoDark from "../assets/logo-dark-256.png";
+import logoLight from "../assets/logo-light-256.png";
 
 function Hero({ theme }) {
   const logoSrc = theme === "light" ? logoLight : logoDark;
@@ -8,7 +8,15 @@ function Hero({ theme }) {
     <section id="home" className="hero">
       <div className="hero__content fade-up glass-panel">
         <span className="section-kicker">Premium Chess Academy</span>
-        <img className="hero__logo" src={logoSrc} alt="ChessIQ emblem" />
+        <img
+          className="hero__logo"
+          src={logoSrc}
+          alt="ChessIQ emblem"
+          width="100"
+          height="100"
+          decoding="async"
+          fetchPriority="high"
+        />
         <h1>
           <span>Chess</span>
           <span className="hero__title-accent">IQ</span>
